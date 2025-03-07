@@ -1,15 +1,15 @@
 using Godot;
 using System;
 
-enum gameState{
-	Wander,
-	Idle,
-	Surprised,
-	Wary,
-	Investigating,
-	Reinforcing,
-	Alerted,
-	Chasing
+enum GameState{
+	Wander, //default state 1, nonhostile
+	Idle, //default state 2, nonhostile
+	Surprised, //interrupts defaults, opens detection logic and transitions to wary or investigating
+	Wary, //moves/patrols but is easier to detect player
+	Investigating, //moves toward a given position and is easier to detect player
+	Reinforcing, //will communicate to rest of enemies to alert them 
+	Alerted, //hostile, moves towards player last known position
+	Chasing //hostile, actively chasing/attacking player
 }
 public partial class Enemy : Node3D
 {
