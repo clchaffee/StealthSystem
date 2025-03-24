@@ -38,12 +38,12 @@ public void TESTCanSeePlayer()
 			if (canSeePlayer)
 			{
 				currentDetection = Mathf.Max(0, currentDetection + detectionIncreaseRate * (float)GetProcessDeltaTime());
-				GD.Print($"Current Detection: {currentDetection}");
+				GD.Print($"State: {currentGameState} || Current Detection: {(int)currentDetection}");
 			}
 			else
 			{
 				currentDetection = Mathf.Max(0, currentDetection - detectionDecayRate * (float)GetProcessDeltaTime());
-				GD.Print($"Current Detection: {currentDetection}");
+				GD.Print($"State: {currentGameState} || Current Detection: {(int)currentDetection}");
 			}
 			if (currentDetection >= detectPlayerThreshold / 2)
 			{
@@ -54,7 +54,7 @@ public void TESTCanSeePlayer()
 			currentGameState = canSeePlayer ? GameState.Wary : GameState.Investigating;
 			break;
 		case GameState.Wary:
-			GD.Print("There's something here...");
+				GD.Print($"State: {currentGameState} || Current Detection: {(int)currentDetection}");
 			//if they can see the player while wary, their detecting increases faster
 			if (canSeePlayer)
 			{
@@ -103,7 +103,7 @@ public void TESTCanSeePlayer()
 			break;
 		case GameState.Reinforcing:
 		case GameState.Alerted:
-			GD.Print("I'll find you yet!");
+				GD.Print($"State: {currentGameState} || Current Detection: {(int)currentDetection}");
 			if (canSeePlayer) currentGameState = GameState.Chasing;
 			else
 			{
@@ -116,7 +116,7 @@ public void TESTCanSeePlayer()
 			break;
 		case GameState.Chasing:
 			currentDetection = detectPlayerThreshold;
-			GD.Print("I'ma get you boy");
+				GD.Print($"State: {currentGameState} || Current Detection: {(int)currentDetection}");
 			if (!canSeePlayer) currentGameState = GameState.Alerted;
 			break;
 		default:
